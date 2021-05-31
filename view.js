@@ -26,7 +26,7 @@ function getTable(model){
     return data;
 }
 
-function input(model){
+function inputSelectAction(){
     return inquirer.prompt([
         {
             name: "selectAction",
@@ -34,6 +34,19 @@ function input(model){
             message: "Select action",
             choices: ["Add city","Update city","Delate city"]
         }
+        
+    ])
+}
+
+function inputLocation(){
+    return inquirer.prompt([
+        {
+            name: "location",
+            type: "input",
+            message: "Location?",
+            default: "city"
+        }
+        
     ])
 }
 
@@ -48,5 +61,6 @@ function view(model){
 
 module.exports={
     view,
-    input
+    inputSelectAction,
+    inputLocation
 }
