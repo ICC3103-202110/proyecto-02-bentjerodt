@@ -1,4 +1,4 @@
-const {inputSelectAction,inputLocation,inputDelate} = require("./view");
+const {inputSelectAction,inputLocation,inputDelete} = require("./view");
 const {printTable} = require("console-table-printer");
 
 async function app(state,update,view){
@@ -6,22 +6,17 @@ async function app(state,update,view){
         const {model, currentView} = state;
         const {title, table} = currentView;
 
-       
         console.clear();
         console.log(title);
 
         if(table.length===0) null;
         else printTable(table);
-        
-        console.log(model.cities);
-
-        //printTable(table);
 
         const {selectAction} = await inputSelectAction();
 
         if(selectAction === "Add city"){
             const {location} = await inputLocation();
-            const updatedModel = update(selectAction,location,model);
+            const updatedModel = update(selectAction,location,true,model);
             
             state = {
                 model: updatedModel,
@@ -29,7 +24,7 @@ async function app(state,update,view){
             }
         }
         else if(selectAction === "Update city"){
-            const updatedModel = update(selectAction,location,model);
+            const updatedModel = update(selectAction,true,true,model);
 
             state = {
                 model: updatedModel,
@@ -37,17 +32,22 @@ async function app(state,update,view){
             }
             
         }
-        else if(selectAction === "Delate city"){
-            const updatedModel = update(selectAction,true,model);
+        else if(selectAction === "Delete city"){
+            
+
             if(table.length === 0) null;
             else{
-                const {delate} = await inputDelate(model);
+                const {dele} = await inputDelete(model);
+                const updatedModel = update(selectAction,true,dele,model);
+
+                state = {
+                    model: updatedModel,
+                    currentView: view(updatedModel)
+                }
             }  
 
-            state = {
-                model: updatedModel,
-                currentView: view(updatedModel)
-            }
+
+            
         }
 
     

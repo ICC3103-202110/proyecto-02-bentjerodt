@@ -34,8 +34,8 @@ function inputSelectAction(){
         {
             name: "selectAction",
             type: "list",
-            message: "Select action",
-            choices: ["Add city","Update city","Delate city"]
+            message: "Select action:",
+            choices: ["Add city","Update city","Delete city"]
         }
         
     ])
@@ -53,12 +53,13 @@ function inputLocation(){
     ])
 }
 
-function inputDelate(model){
+function inputDelete(model){
     
     return inquirer.prompt([
         {
-            name: "delate",
+            name: "dele",
             type: "list",
+            message: "Delete city:",
             choices: model.cities
         }
     ])
@@ -77,5 +78,5 @@ module.exports={
     view,
     inputSelectAction,
     inputLocation,
-    inputDelate
+    inputDelete
 }

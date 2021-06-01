@@ -10,21 +10,24 @@ function addCity(location,model){
     return model;
 }
 
-function delateCity(){
-
+function deleteCity(dele,model){
+    let index = model.cities.indexOf(dele);
+    model.cities.splice(index,1);
+    model.temp.splice(index,1);
+    model.max.splice(index,1);
+    model.min.splice(index,1);
+    return model;
 }
 
-
-function update(selectAction,location,model){
+function update(selectAction,location,dele,model){
     if(selectAction === "Add city"){
-        return addCity(location,model);
-        
+        return addCity(location,model);    
     }
     else if(selectAction === "Update city"){
-
+        return model;
     }
-    else if(selectAction === "Delate city"){
-
+    else if(selectAction === "Delete city"){
+        return deleteCity(dele,model);
     }
     else return 1;
 }
