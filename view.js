@@ -18,11 +18,14 @@ function getTitle(){
 }
 
 function getTable(model){
-    const {name,temp,max,min}=model;
+    let {cities,temp,max,min} = model;
     let data = [];
-    for(let i;i<name.length;i++){
-        data.push({"name":name,"temp":temp,"max":max,"min":min})
+
+    for(let i=0;i<cities.length;i++){
+        data.push({"name":cities[i],"temp":temp[i],"max":max[i],"min":min[i]});
+        
     }
+    
     return data;
 }
 
@@ -50,6 +53,17 @@ function inputLocation(){
     ])
 }
 
+function inputDelate(model){
+    
+    return inquirer.prompt([
+        {
+            name: "delate",
+            type: "list",
+            choices: model.cities
+        }
+    ])
+}
+
 
 function view(model){
     return {
@@ -62,5 +76,6 @@ function view(model){
 module.exports={
     view,
     inputSelectAction,
-    inputLocation
+    inputLocation,
+    inputDelate
 }

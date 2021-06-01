@@ -2,10 +2,10 @@ const {printTable} = require('console-table-printer');
 
 initModel = {
     selectAction: "",
-    name: ["santiago"],
-    temp: [27],
-    max: [30],
-    min: [24]
+    cities: [],
+    temp: [],
+    max: [],
+    min: []
 }
 module.exports = {
     initModel
