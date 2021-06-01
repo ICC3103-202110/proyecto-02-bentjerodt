@@ -1,7 +1,7 @@
-const {inputSelectAction,inputLocation,inputDelete} = require("./view");
+const {inputSelectAction,inputLocation,inputDelete,inputUpdate} = require("./view");
 const {printTable} = require("console-table-printer");
 
-async function app(state,update,view){
+async function app(state,updateModel,view){
     while(true){
         const {model, currentView} = state;
         const {title, table} = currentView;
@@ -16,7 +16,7 @@ async function app(state,update,view){
 
         if(selectAction === "Add city"){
             const {location} = await inputLocation();
-            const updatedModel = update(selectAction,location,true,model);
+            const updatedModel = updateModel(selectAction,location,true,true,model);
             
             state = {
                 model: updatedModel,
@@ -24,37 +24,31 @@ async function app(state,update,view){
             }
         }
         else if(selectAction === "Update city"){
-            const updatedModel = update(selectAction,true,true,model);
-
-            state = {
-                model: updatedModel,
-                currentView: view(updatedModel)
+            if(table.length === 0) null;
+            else{
+                const {update} = await inputUpdate(model);
+                const updatedModel = updateModel(selectAction,true,true,update,model);
+                
+                state = {
+                    model: updatedModel,
+                    currentView: view(updatedModel)
+                }
             }
             
         }
         else if(selectAction === "Delete city"){
-            
-
             if(table.length === 0) null;
             else{
                 const {dele} = await inputDelete(model);
-                const updatedModel = update(selectAction,true,dele,model);
+                const updatedModel = updateModel(selectAction,true,dele,true,model);
 
                 state = {
                     model: updatedModel,
                     currentView: view(updatedModel)
                 }
-            }  
-
-
-            
+            }   
         }
-
-    
     }
-
-    
-    
 }
 
 module.exports = {

@@ -1,9 +1,7 @@
 const figlet = require('figlet');
 const chalk = require('chalk');
 const inquirer = require('inquirer');
-const { initModel } = require('./model');
 const { printTable } = require('console-table-printer');
-
 
 function getTitle(){
     return chalk.magenta(
@@ -54,7 +52,6 @@ function inputLocation(){
 }
 
 function inputDelete(model){
-    
     return inquirer.prompt([
         {
             name: "dele",
@@ -65,6 +62,16 @@ function inputDelete(model){
     ])
 }
 
+function inputUpdate(model){
+    return inquirer.prompt([
+        {
+            name: "update",
+            type: "list",
+            message: "Update city:",
+            choices: model.cities
+        }
+    ])
+}
 
 function view(model){
     return {
@@ -73,10 +80,10 @@ function view(model){
     }
 }
 
-
 module.exports={
     view,
     inputSelectAction,
     inputLocation,
-    inputDelete
+    inputDelete,
+    inputUpdate
 }
