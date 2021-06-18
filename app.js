@@ -1,6 +1,8 @@
+//We import some parte of the code and some modules 
 const {inputSelectAction,inputLocation,inputDelete,inputUpdate} = require("./view");
 const {printTable} = require("console-table-printer");
 
+//The app is a loop that refresh the console, and call the functions to actualice the model and print them
 async function app(state,updateModel,view){
     while(true){
         const {model, currentView} = state;

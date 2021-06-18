@@ -2,6 +2,7 @@ const axios = require("axios");
 const url = "https://api.openweathermap.org/data/2.5/weather";
 const key = "955cc27669d64bdc2f4aeca844697c51";
 
+//Function returns a dictionary that contains the tempertures from an specific city searched in Open weather api
 function getApiCityTemp(city) {
     
     const link  = `${url}?q=${city}&appid=${key}`
