@@ -1,12 +1,27 @@
-function addCity(location,model){
-    let max = Math.floor(Math.random()*31); //entre 0 y 30
+const {getApiCityTemp} = require("./api")
+
+async function addCity(location,model){
+    /*let max = Math.floor(Math.random()*31); //entre 0 y 30
     let min = Math.floor(Math.random()*(max+1)); //entre 0 y max
     let t = min + Math.floor(Math.random()*(max-min+1)); //entre min y max
 
     model.cities.push(location);
     model.temp.push(t);
     model.max.push(max);
-    model.min.push(min);
+    model.min.push(min);*/
+
+    const apiResult = await getApiCityTemp(location);
+    if(apiResult=="City not found") return false;
+
+    const temp = await apiResult.act;
+    const temp_max = await apiResult.max;
+    const temp_min = await apiResult.min;
+
+    model.cities.push(location);
+    model.temp.push(temp);
+    model.max.push(temp_max);
+    model.min.push(temp_min);
+
     return model;
 }
 

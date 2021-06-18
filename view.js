@@ -1,7 +1,6 @@
-const figlet = require('figlet');
-const chalk = require('chalk');
-const inquirer = require('inquirer');
-const { printTable } = require('console-table-printer');
+const figlet = require("figlet");
+const chalk = require("chalk");
+const inquirer = require("inquirer");
 
 function getTitle(){
     return chalk.magenta(
@@ -16,10 +15,13 @@ function getTitle(){
 }
 
 function getTable(model){
-    let {cities,temp,max,min} = model;
-    let data = [];
+    const {cities,temp,max,min} = model;
+    const data = [];
 
-    for(let i=0;i<cities.length;i++){
+    let n=0;
+    for(city in cities) i++;
+
+    for(let i=0;i<n;i++){
         data.push({"name":cities[i],"temp":temp[i],"max":max[i],"min":min[i]});
         
     }
@@ -33,7 +35,7 @@ function inputSelectAction(){
             name: "selectAction",
             type: "list",
             message: "Select action:",
-            choices: ["Add city","Update city","Delete city"]
+            choices: ["Add city","Update city","Delete city","Exit"]
         }
         
     ])

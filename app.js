@@ -16,7 +16,7 @@ async function app(state,updateModel,view){
 
         if(selectAction === "Add city"){
             const {location} = await inputLocation();
-            const updatedModel = updateModel(selectAction,location,true,true,model);
+            const updatedModel = await updateModel(selectAction,location,true,true,model);
             
             state = {
                 model: updatedModel,
@@ -27,7 +27,7 @@ async function app(state,updateModel,view){
             if(table.length === 0) null;
             else{
                 const {update} = await inputUpdate(model);
-                const updatedModel = updateModel(selectAction,true,true,update,model);
+                const updatedModel = await updateModel(selectAction,true,true,update,model);
                 
                 state = {
                     model: updatedModel,
@@ -40,14 +40,15 @@ async function app(state,updateModel,view){
             if(table.length === 0) null;
             else{
                 const {dele} = await inputDelete(model);
-                const updatedModel = updateModel(selectAction,true,dele,true,model);
+                const updatedModel = await updateModel(selectAction,true,dele,true,model);
 
                 state = {
                     model: updatedModel,
                     currentView: view(updatedModel)
                 }
-            }   
+            } 
         }
+        else return 0; 
     }
 }
 

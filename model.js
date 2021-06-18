@@ -1,4 +1,4 @@
-const {printTable} = require('console-table-printer');
+const {printTable} = require("console-table-printer");
 
 initModel = {
     selectAction: "",
